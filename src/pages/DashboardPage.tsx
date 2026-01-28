@@ -10,7 +10,7 @@ interface Checklist {
 
 interface Task {
   id: number;
-  name: string;
+  title: string;
   is_complete: boolean;
   checklist_id: number;
 }
@@ -94,7 +94,7 @@ const DashboardPage = () => {
 
     const { data, error } = await supabase
       .from('tasks')
-      .insert({ name: newTaskName, checklist_id: selectedChecklist.id, user_id: user.id })
+      .insert({ title: newTaskName, checklist_id: selectedChecklist.id, user_id: user.id })
       .select()
       .single();
 
@@ -200,7 +200,7 @@ const DashboardPage = () => {
                   >
                     <span className={`mr-3 w-5 h-5 rounded-full ${task.is_complete ? 'bg-green-500' : 'border-2 border-gray-500'}`}></span>
                     <span className={`${task.is_complete ? 'line-through text-gray-500' : ''}`}>
-                      {task.name}
+                      {task.title}
                     </span>
                   </li>
                 ))}

@@ -31,12 +31,20 @@ Follow these instructions to get the project up and running on your local machin
     ```
 
 3.  **Set up environment variables:**
-    -   Create a file named `.env` in the root of the project.
-    -   Add your Supabase project credentials to this file. You can find these in your Supabase project's "Settings" > "API" section.
-    ```env
-    VITE_SUPABASE_URL=your-supabase-project-url
-    VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-    ```
+    -   Copy the example environment file `.env.example` to a new file named `.env`.
+        ```bash
+        cp .env.example .env
+        ```
+    -   Open the `.env` file and add your Supabase project credentials. You can find these in your Supabase project's "Settings" > "API" section.
+
+### Supabase Database Schema
+
+**Important:** For the application to work correctly, your Supabase database must have the following structure:
+
+-   A table named `checklists` with a column named `title` (type `text`).
+-   A table named `tasks` with a column named `title` (type `text`).
+
+The application code uses `title` to store the name of both checklists and tasks.
 
 ### Running the Development Server
 
