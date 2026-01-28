@@ -4,7 +4,7 @@ import type { User } from '@supabase/supabase-js';
 
 interface Checklist {
   id: number;
-  name: string;
+  title: string;
   user_id: string;
 }
 
@@ -76,7 +76,7 @@ const DashboardPage = () => {
 
     const { data, error } = await supabase
       .from('checklists')
-      .insert({ name: newChecklistName, user_id: user.id })
+      .insert({ title: newChecklistName, user_id: user.id })
       .select()
       .single();
 
@@ -166,7 +166,7 @@ const DashboardPage = () => {
                 onClick={() => handleSelectChecklist(list)}
                 className={`p-3 rounded-md cursor-pointer ${selectedChecklist?.id === list.id ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'}`}
               >
-                {list.name}
+                {list.title}
               </li>
             ))}
           </ul>
@@ -175,7 +175,7 @@ const DashboardPage = () => {
         <section className="md:col-span-2 bg-gray-800 p-6 rounded-lg">
           {selectedChecklist ? (
             <div>
-              <h2 className="text-2xl font-semibold mb-4">{selectedChecklist.name}</h2>
+              <h2 className="text-2xl font-semibold mb-4">{selectedChecklist.title}</h2>
               <form onSubmit={handleAddTask} className="mb-6">
                  <input
                     type="text"
