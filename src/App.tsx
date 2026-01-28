@@ -3,10 +3,12 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './lib/supabaseClient';
 import AuthPage from './pages/AuthPage';
 import DashboardPage from './pages/DashboardPage';
-import { Session } from '@supabase/supabase-js';
+import type { Session } from '@supabase/supabase-js';
 
 // A simple component to handle protected routes
-const ProtectedRoute = ({ session, children }: { session: Session | null, children: JSX.Element }) => {
+import type { ReactNode } from 'react';
+
+const ProtectedRoute = ({ session, children }: { session: Session | null, children: ReactNode }) => {
   if (!session) {
     return <Navigate to="/auth" replace />;
   }
