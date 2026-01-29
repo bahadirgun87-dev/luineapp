@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
 import ProgressBar from '../components/ProgressBar';
@@ -27,6 +28,7 @@ const DashboardPage = () => {
   const [newTaskName, setNewTaskName] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   // ... (Data fetching and handlers remain the same)
   const fetchChecklistsWithTasks = useCallback(async (userId: string) => {
@@ -115,12 +117,23 @@ const DashboardPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-            <button
-              onClick={handleLogout}
-              className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-md text-sm transition-colors"
-            >
-              Logout
-            </button>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => navigate('/marketplace')}
+                className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 font-bold py-2 px-4 rounded-md text-sm transition-colors border border-slate-300"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Explore Templates
+              </button>
+              <button
+                onClick={handleLogout}
+                className="bg-slate-800 hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-md text-sm transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </header>
