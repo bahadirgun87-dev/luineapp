@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smoke Test Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <h1>Web Sites</h1>
+    <form action="/dashboard/sites" method="post" class="mb-4">
+        <div class="row">
+            <div class="col">
+                <input type="text" name="name" class="form-control" placeholder="Site Name" required>
+            </div>
+            <div class="col">
+                <input type="url" name="url" class="form-control" placeholder="https://example.com" required>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Add Site</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in sites %}
+            <tr>
+                <td>{{ site.name }}</td>
+                <td><a href="{{ site.url }}" target="_blank">{{ site.url }}</a></td>
+                <td>
+                    <a href="/dashboard/sites/{{ site.id }}" class="btn btn-sm btn-info">Manage Scenarios</a>
+                    <form action="/dashboard/run/{{ site.id }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success">Run Test</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
